@@ -7,7 +7,7 @@ const seed = {
       mainArtworks: ['Ecstasy of Saint Teresa', 'The Rape of Proserpina']
     },
     {
-      name: 'Migul Angel Buonarroti',
+      name: 'Miguel Angel Buonarroti',
       movement: 'Renaissance',
       area: ['sculpture', 'pinture', 'arquitecture'],
       mainArtworks: ['Sistine Chapel', 'David', 'Pietá']

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-require('../config/db.js');
-const Author = require('../api/models/author.js');
-const Artwork = require('../api/models/artwork.js');
-const seed = require('./seed.js')
-
+require('dotenv').config();
+require('../config/db');
+const Author = require('../api/models/author');
+const Artwork = require('../api/models/artwork');
+const seed = require('./seed');
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -14,18 +14,18 @@ mongoose
 
       if (oldAuthors) {
         await Author.collection.drop();
-        console.log('La colección Authors se ha vaciado');
+        console.log('Authors dropped');
       }
       if (oldArtworks) {
         await Artwork.collection.drop();
-        console.log('La colección Artworks se ha vaciado');
+        console.log('Artworks dropped');
       }
 
-      await Author.insertMany(seed.authors);
       await Artwork.insertMany(seed.artworks);
-      console.log('Populated seed in DB');
+      await Author.insertMany(seed.authors);
+      console.log('Data saved');
     } catch (error) {
-      console.log('Error populating seed in DB: ' + error);
+      console.log('Error saving data: ' + error);
     }
   })
   .finally(() => mongoose.disconnect());

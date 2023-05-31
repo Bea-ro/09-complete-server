@@ -31,9 +31,9 @@ const getAuthorById = async (req, res, next) => {
 const updateAuthorById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const uodatedAuthor = await Author.findByIdAndUpdate(id, req.body, {
+    const updatedAuthor = await Author.findByIdAndUpdate(id, req.body, {
       new: true
-    });
+    }).populate('mainArtworks');
     return res.status(200).json(updatedAuthor);
   } catch (error) {
     return res.status(400).json({ data: 'Error updating author', error: error });

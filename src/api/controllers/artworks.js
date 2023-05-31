@@ -21,7 +21,7 @@ const createArtwork = async (req, res, next) => {
 
 const getArtworkById = async (req, res, next) => {
   try {
-    const artwork = await Artwork.findById(req.params.id)
+    const artwork = await Artwork.findById(req.params.id);
     res.status(200).json(artwork);
   } catch (error) {
     return res.status(400).json({ data: 'Artwork not found', error: error });

@@ -7,7 +7,8 @@ const MovementSchema = new mongoose.Schema(
     authors: [{ type: mongoose.Types.ObjectId, required: true, trim: true, ref: 'Author' }]
   },
   {
-    timestamps: true
+    timestamps: true,
+    collection: 'movements'
   }
 );
 
