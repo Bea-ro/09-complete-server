@@ -1,6 +1,7 @@
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const { signToken } = require('../../config/jwt');
-const bcrypt = require('bcrypt');
+
 
 const getUsers = async (req, res, next) => {
   try {
@@ -13,7 +14,7 @@ const getUsers = async (req, res, next) => {
 
 const registerUser = async (req, res, next) => {
   try {
-    const user = await User.findOne(req.body.email);
+    const user = await User.findOne({email: req.body.email});
     if (user) {
       throw new Error('User already exists');
     }
