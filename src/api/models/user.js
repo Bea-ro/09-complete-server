@@ -4,8 +4,14 @@ const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema(
   {
     email: { type: String, unique: true, required: true, trim: true },
-    password: { type: String, required: true, trim: true }
-    //mín 6 caracteres, 1 may y 1 min
+    password: { type: String, required: true, trim: true },
+    // validate: {
+    //   validator: function (value) {
+    //     // Expresión regular para verificar la longitud mínima y presencia de mayúscula y minúscula
+    //     return /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(value);
+    //   },
+    //   message: 'Password must have at least six characters, one uppercase and one lowercase.'
+    // }
   },
   {
     timestamps: true,
@@ -13,7 +19,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
   this.password = bcrypt.hashSync(this.password, 10);
   next();
 });

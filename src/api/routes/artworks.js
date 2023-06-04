@@ -8,14 +8,14 @@ const {
   deleteArtworkFieldById
 } = require('../controllers/artworks');
 const router = express.Router();
-const { isAuthenticated } = require('../../middleware/authentication');
+const { isAuth } = require('../../middleware/authentication');
 
 router.get('/', getAllArtworks);
 router.get('/:id', getArtworkById);
-router.post('/', isAuthenticated, createArtwork);
-router.put('/:id', isAuthenticated, updateArtworkById);
-router.delete('/:id', isAuthenticated, deleteArtwork);
-router.delete('/:id/author', isAuthenticated, deleteArtworkFieldById);
+router.post('/', [isAuth], createArtwork);
+router.put('/:id', [isAuth], updateArtworkById);
+router.delete('/:id', [isAuth], deleteArtwork);
+router.delete('/:id/author', [isAuth], deleteArtworkFieldById);
 
 module.exports = router;
 

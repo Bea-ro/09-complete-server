@@ -1,9 +1,8 @@
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
-require('./config/db');
-const cors = require('cors');
-const mainRouter = require('./api/routes/index');
+const mainRouter = require('./api/routes/index'); 
 const connect = require('./config/db');
+const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 
 const app = express();
@@ -30,11 +29,11 @@ app.disable('x-powered-by');
 app.use('/api', mainRouter);
 
 app.use('*', (req, res, next) => {
-  res.status(404).json({ data: 'Page not found' });
+  res.status(404).json({ message: 'Page not found' });
 });
 
 app.use((error, req, res, next) => {
-  res.status(500).json({ data: 'Internal server error' });
+  res.status(500).json({ message: 'Internal server error' });
 });
 
 const PORT = Number(process.env.PORT);
@@ -42,5 +41,5 @@ const PORT = Number(process.env.PORT);
 connect();
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
