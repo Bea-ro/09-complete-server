@@ -1,13 +1,16 @@
 require('dotenv').config();
 const express = require('express');
-const mainRouter = require('./api/routes/index'); 
-const connect = require('./config/db');
-const cors = require('cors');
 const rateLimit = require('express-rate-limit');
+const cors = require('cors');
+const mainRouter = require('./api/routes/index');
+const connect = require('./config/db');
+
+const { configCloudinary } = require('./api/controllers/avatars');
 
 const app = express();
 
 app.use(cors());
+configCloudinary();
 
 const limiter = rateLimit({
   windowMs: 3 * 60 * 1000,

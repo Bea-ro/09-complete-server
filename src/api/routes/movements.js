@@ -6,13 +6,13 @@ const {
   updateMovementById,
   deleteMovement
 } = require('../controllers/movements');
-const router = express.Router();
-const { isAuth } = require('../../middleware/authentication');
+const movementsRouter = express.movementsRouter();
+const { isAuth } = require('../../middlewares/authentication');
 
-router.get('/', getAllMovements);
-router.get('/:id', getMovementById);
-router.post('/', [isAuth], createMovement);
-router.put('/:id', [isAuth], updateMovementById);
-router.delete('/:id', [isAuth], deleteMovement);
+movementsRouter.get('/', getAllMovements);
+movementsRouter.get('/:id', getMovementById);
+movementsRouter.post('/', [isAuth], createMovement);
+movementsRouter.put('/:id', [isAuth], updateMovementById);
+movementsRouter.delete('/:id', [isAuth], deleteMovement);
 
-module.exports = router;
+module.exports = movementsRouter;
