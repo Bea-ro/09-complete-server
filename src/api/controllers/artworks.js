@@ -1,4 +1,5 @@
 const Artwork = require('../models/artwork');
+const { deleteImgCloudinary } = require('../../middlewares/uploadFile');
 
 const getAllArtworks = async (req, res, next) => {
   try {
@@ -60,11 +61,30 @@ const deleteArtworkFieldById = async (req, res, next) => {
   }
 };
 
+const uploadArtworkImg = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const newArtwork = req.body;
+    const originalArtwork = await Artwork.findById(id);
+    if (req.file) {
+      deleteImgCloudinary(originalArtwork.image);
+      newArtwork.image = req.file.path;
+    }
+    const updatedArtwork = await Artwork.findByIdAndUpdate(id, newArtwork, {
+      new: true
+    });
+    return res.status(200).json(updatedArtwork);
+  } catch (error) {
+    return res.status(400).json({ mensaje: 'Error uploading artwork image', error: error });
+  }
+};
+
 module.exports = {
   getAllArtworks,
   createArtwork,
   getArtworkById,
   updateArtworkById,
   deleteArtwork,
-  deleteArtworkFieldById
+  deleteArtworkFieldById,
+  uploadArtworkImg
 };

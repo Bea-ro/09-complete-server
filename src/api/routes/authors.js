@@ -7,14 +7,14 @@ const {
   deleteAuthor,
   addOrRemoveArtwork
 } = require('../controllers/authors');
-const authorsRouter = express.Router();
+const router = express.Router();
 const { isAuth } = require('../../middlewares/authentication');
 
-authorsRouter.get('/', getAllAuthors);
-authorsRouter.get('/:id', getAuthorById);
-authorsRouter.post('/', [isAuth], createAuthor);
-authorsRouter.put('/:id', [isAuth], updateAuthorById);
-authorsRouter.delete('/:id', [isAuth], deleteAuthor);
-authorsRouter.put('/:id/artwork', [isAuth], addOrRemoveArtwork);
+router.get('/', getAllAuthors);
+router.get('/:id', getAuthorById);
+router.post('/', [isAuth], createAuthor);
+router.put('/:id', [isAuth], updateAuthorById);
+router.delete('/:id', [isAuth], deleteAuthor);
+router.put('/:id/artwork', [isAuth], addOrRemoveArtwork);
 
-module.exports = authorsRouter;
+module.exports = router;

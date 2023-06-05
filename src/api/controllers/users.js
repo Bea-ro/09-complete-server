@@ -1,9 +1,9 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const { signToken } = require('../../config/jwt');
+const { deleteImgCloudinary } = require('../../middlewares/uploadFile');
 
-
-const getUsers = async (req, res, next) => {
+const getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find();
     return res.status(200).json(users);
@@ -14,9 +14,9 @@ const getUsers = async (req, res, next) => {
 
 const registerUser = async (req, res, next) => {
   try {
-    const user = await User.findOne({email: req.body.email});
+    const user = await User.findOne({ email: req.body.email });
     if (user) {
-      throw new Error('User already exists');
+      return res.status(400).json({ message: 'User already exists' });
     }
     const newUser = new User(req.body);
     const createdUser = await newUser.save();
@@ -37,15 +37,34 @@ const loginUser = async (req, res, next) => {
       const token = signToken(userDB._id);
       return res.status(200).json({ token, userDB });
     } else {
-        return res.status(400).json({ message: 'Incorrect password' });
+      return res.status(400).json({ message: 'Incorrect password' });
     }
   } catch (error) {
     return res.status(400).json({ message: 'Login failed' });
   }
 };
 
+const uploadAvatar = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const newUser = req.body;
+    const originalUser = await User.findById(id);
+    if (req.file) {
+      deleteImgCloudinary(originalUser.avatar);
+      newUser.avatar = req.file.path;
+    }
+    const updatedUser = await User.findByIdAndUpdate(id, newUser, {
+      new: true
+    });
+    return res.status(200).json(updatedUser);
+  } catch (error) {
+    return res.status(400).json({ mensaje: 'Error uploading avatar', error: error });
+  }
+};
+
 module.exports = {
-  getUsers,
+  getAllUsers,
   registerUser,
-  loginUser
+  loginUser,
+  uploadAvatar
 };

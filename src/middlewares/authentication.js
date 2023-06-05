@@ -9,9 +9,9 @@ const isAuth = async (req, res, next) => {
       return res.status(401).json({message: 'There is no token'});
     }
 
-    const parsedToken = token.replace('Bearer ', '');
+    const parsedToken = token?.replace('Bearer ', '');
     const validToken = verifyToken(parsedToken);
-    const userLogued = await User.findById(validToken.id);
+    const userLogued = await User.findById(validToken.email);
 
     userLogued.password = null;
     req.user = userLogued;
