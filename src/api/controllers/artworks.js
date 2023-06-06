@@ -61,32 +61,29 @@ const deleteArtworkFieldById = async (req, res, next) => {
   }
 };
 
-  const uploadArtworkImg = async (req, res, next) => {
-    try {
-      const { id } = req.params;
-  
-      if (Artwork.image) {
-        const originalArtwork = await Artwork.findById(id);
-        const updatedArtwork = { ...originalArtwork.toObject() };
-        if (req.file) {
-          deleteImgCloudinary(originalArtwork.image);
-          updatedArtwork.image = req.file.path;
-        }
-        const savedArtwork = await Artwork.findByIdAndUpdate(id, updatedArtwork, {
-          new: true
-        });
-        return res.status(200).json(savedArtwork);
-      } else {
-        if (req.file) {
-          const updatedArtwork = await Artwork.findByIdAndUpdate(id, { $set: { image: req.file.path } }, { new: true });
-          return res.status(200).json(updatedArtwork);
-        }
+const uploadArtworkImg = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    if (req.file) {
+      const originalArtwork = await Artwork.findById(id);
+      console.log('originalArtwork', originalArtwork);
+      if (originalArtwork.image) {
+        deleteImgCloudinary(originalArtwork.image);
       }
-    } catch (error) {
-      return res.status(400).json({ mensaje: 'Error uploading image', error: error });
+
+      const updatedArtwork = await Artwork.findByIdAndUpdate(
+        id,
+        { $set: { image: req.file.path } },
+        { new: true }
+      );
+      console.log('updatedArtwork', updatedArtwork);
+      return res.status(200).json(updatedArtwork);
     }
-  };
-  
+  } catch (error) {
+    return res.status(400).json({ mensaje: 'Error uploading image', error: error });
+  }
+};
+
 module.exports = {
   getAllArtworks,
   createArtwork,

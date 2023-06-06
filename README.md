@@ -21,7 +21,7 @@ Page not found example: https://localhost:4001/api/autor
 | GET          | /artworks/:id | See artwork by id              |
 | POST         | /artworks     | Create artwork (auth)          |
 | PUT          | /artworks/:id | Edit existing artwork (auth)   |
-| PUT          | /artworks/:id | Add image to an artwork (auth) |
+| PATCH        | /artworks/:id | Add image to an artwork (auth) |
 | DELETE       | /artworks/:id | Remove artwork (auth)          |
 
 ### MOVEMENTS MODEL: 

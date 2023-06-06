@@ -16,7 +16,7 @@ router.get('/', getAllArtworks);
 router.get('/:id', getArtworkById);
 router.post('/', [isAuth], createArtwork);
 router.put('/:id', [isAuth], updateArtworkById);
-router.put('/:id', [isAuth], uploadImgCloudinary.single('image'), uploadArtworkImg);
+router.patch('/:id', [isAuth], uploadImgCloudinary.single('image'), uploadArtworkImg);
 router.delete('/:id', [isAuth], deleteArtwork);
 router.delete('/:id/author', [isAuth], deleteArtworkFieldById);
 

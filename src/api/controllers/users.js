@@ -36,9 +36,8 @@ const loginUser = async (req, res, next) => {
     if (bcrypt.compareSync(req.body.password, userDB.password)) {
       const token = signToken(userDB._id);
       return res.status(200).json({ token, userDB });
-    } else {
-      return res.status(400).json({ message: 'Incorrect password' });
     }
+    return res.status(400).json({ message: 'Incorrect password' });
   } catch (error) {
     return res.status(400).json({ message: 'Login failed' });
   }
@@ -57,23 +56,18 @@ const deregisterUser = async (req, res, next) => {
 const uploadAvatar = async (req, res, next) => {
   try {
     const { id } = req.params;
-
-    if (User.avatar) {
+    if (req.file) {
       const originalUser = await User.findById(id);
-      const updatedUser = { ...originalUser.toObject() };
-      if (req.file) {
+      if (originalUser.avatar) {
         deleteImgCloudinary(originalUser.avatar);
-        updatedUser.avatar = req.file.path;
       }
-      const savedUser = await User.findByIdAndUpdate(id, updatedUser, {
-        new: true
-      });
-      return res.status(200).json(savedUser);
-    } else {
-      if (req.file) {
-        const updatedUser = await User.findByIdAndUpdate(id, { $set: { avatar: req.file.path } }, { new: true });
-        return res.status(200).json(updatedUser);
-      }
+
+      const updatedUser = await User.findByIdAndUpdate(
+        id,
+        { $set: { avatar: req.file.path } },
+        { new: true }
+      );
+      return res.status(200).json(updatedUser);
     }
   } catch (error) {
     return res.status(400).json({ mensaje: 'Error uploading avatar', error: error });
