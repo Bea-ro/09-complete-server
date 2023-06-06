@@ -15,7 +15,7 @@ const createAuthor = async (req, res, next) => {
     const createdAuthor = await newAuthor.save();
     return res.status(201).json(createdAuthor);
   } catch (error) {
-    return res.status(400).json({ data: 'Error creating author', error: error });
+    return res.status(400).json({ data: 'Error saving author', error: error });
   }
 };
 

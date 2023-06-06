@@ -44,19 +44,37 @@ const loginUser = async (req, res, next) => {
   }
 };
 
+const deregisterUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await User.findByIdAndDelete(id);
+    return res.status(200).json('User deregistered');
+  } catch (error) {
+    return res.status(400).json({ message: 'Error deregistering user' });
+  }
+};
+
 const uploadAvatar = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const newUser = req.body;
-    const originalUser = await User.findById(id);
-    if (req.file) {
-      deleteImgCloudinary(originalUser.avatar);
-      newUser.avatar = req.file.path;
+
+    if (User.avatar) {
+      const originalUser = await User.findById(id);
+      const updatedUser = { ...originalUser.toObject() };
+      if (req.file) {
+        deleteImgCloudinary(originalUser.avatar);
+        updatedUser.avatar = req.file.path;
+      }
+      const savedUser = await User.findByIdAndUpdate(id, updatedUser, {
+        new: true
+      });
+      return res.status(200).json(savedUser);
+    } else {
+      if (req.file) {
+        const updatedUser = await User.findByIdAndUpdate(id, { $set: { avatar: req.file.path } }, { new: true });
+        return res.status(200).json(updatedUser);
+      }
     }
-    const updatedUser = await User.findByIdAndUpdate(id, newUser, {
-      new: true
-    });
-    return res.status(200).json(updatedUser);
   } catch (error) {
     return res.status(400).json({ mensaje: 'Error uploading avatar', error: error });
   }
@@ -66,5 +84,6 @@ module.exports = {
   getAllUsers,
   registerUser,
   loginUser,
-  uploadAvatar
+  uploadAvatar,
+  deregisterUser
 };
