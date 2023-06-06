@@ -1,5 +1,5 @@
 ## Endpoints realted to https://localhost:4001/api
-*(auth) in description indicates that authentication is required for the request 
+Authentication is required for the requests whose description cointains (auth).
 
 Page not found example: https://localhost:4001/api/autor
 
@@ -56,5 +56,5 @@ Page not found example: https://localhost:4001/api/autor
 
 
 ### SEED:
-seed.js field for reference data.  
+See seed.js file for reference data.  
 
