@@ -2,10 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
-const mainRouter = require('./api/routes/index');
-const connect = require('./config/db');
+const mainRouter = require('./src/api/routes/index');
+const connect = require('./src/config/db');
 
-const { configCloudinary } = require('./middlewares/uploadFile');
+const { configCloudinary } = require('./src/middlewares/uploadFile');
 
 const app = express();
 
