@@ -1,7 +1,7 @@
-## Endpoints realted to https://localhost:4001/api
+## Endpoints realted to https://complete-server-rtc.onrender.com/api
 Authentication is required for the requests whose description cointains (auth).
 
-Page not found example: https://localhost:4001/api/autor
+Page not found example: https://complete-server-rtc.onrender.com/ap
 
 ### AUTHORS MODEL: 
 
