@@ -7,7 +7,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'art-api',
-    allowFormats: ['jpg', 'png', 'jpeg', 'gif', 'webp']
+    allowedFormats: ['jpg', 'png', 'jpeg', 'gif', 'webp']
   }
 });
 
