@@ -1,3 +1,15 @@
+> Deployed API 👉 https://complete-server-rtc.onrender.com/api
+
+## Skills
+
+### Javascript, MongoDB, Express, React, Node (MERN)
+- Accesible from any domain by **CORS** configuration.
+- **Rate limit** at 50 requests / 3 minutes.
+- Protected routes by **JWT** (1 hour expiration).
+- Images upload and storage in **Clodinary**.
+- Deployment with **Render**.
+
+
 ## Endpoints realted to https://complete-server-rtc.onrender.com/api
 Authentication is required for the requests whose description cointains (auth).
 

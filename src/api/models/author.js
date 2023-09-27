@@ -6,7 +6,7 @@ const AuthorSchema = new mongoose.Schema(
     movement: { type: String, required: true, trim: true },
     area: {
       type: [String],
-      enum: ['pinture', 'sculpture', 'arquitecture'],
+      enum: ['painting', 'sculpture', 'arquitecture'],
       required: true
     },
     mainArtworks: [{ type: mongoose.Types.ObjectId, required: true, trim: true, ref: 'Artwork' }]

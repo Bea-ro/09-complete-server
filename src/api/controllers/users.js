@@ -8,7 +8,7 @@ const getAllUsers = async (req, res, next) => {
     const users = await User.find();
     return res.status(200).json(users);
   } catch (error) {
-    return res.status(400).json({ message: 'Users not found', error: error });
+    return res.status(400).json({ message: 'Users not found.', error: error });
   }
 };
 
@@ -16,13 +16,13 @@ const registerUser = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ message: 'User already exists.' });
     }
     const newUser = new User(req.body);
     const createdUser = await newUser.save();
     return res.status(201).json(createdUser);
   } catch (error) {
-    return res.status(400).json({ message: 'Error registering user', error: error });
+    return res.status(400).json({ message: 'Error registering user.', error: error });
   }
 };
 
@@ -30,16 +30,16 @@ const loginUser = async (req, res, next) => {
   try {
     const userDB = await User.findOne({ email: req.body.email });
     if (!userDB) {
-      return res.status(400).json({ message: 'User does not exists' });
+      return res.status(400).json({ message: 'User does not exists.' });
     }
 
     if (bcrypt.compareSync(req.body.password, userDB.password)) {
       const token = signToken(userDB._id);
       return res.status(200).json({ token, userDB });
     }
-    return res.status(400).json({ message: 'Incorrect password' });
+    return res.status(400).json({ message: 'Incorrect password.' });
   } catch (error) {
-    return res.status(400).json({ message: 'Login failed' });
+    return res.status(400).json({ message: 'Login failed.' });
   }
 };
 
@@ -47,9 +47,9 @@ const deregisterUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     await User.findByIdAndDelete(id);
-    return res.status(200).json('User deregistered');
+    return res.status(200).json('User deregistered.');
   } catch (error) {
-    return res.status(400).json({ message: 'Error deregistering user' });
+    return res.status(400).json({ message: 'Error deregistering user.' });
   }
 };
 
@@ -70,7 +70,7 @@ const uploadAvatar = async (req, res, next) => {
       return res.status(200).json(updatedUser);
     }
   } catch (error) {
-    return res.status(400).json({ mensaje: 'Error uploading avatar', error: error });
+    return res.status(400).json({ mensaje: 'Error uploading avatar.', error: error });
   }
 };
 

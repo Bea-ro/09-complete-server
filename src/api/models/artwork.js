@@ -7,7 +7,7 @@ const ArtworkSchema = new mongoose.Schema(
     year: { type: Number, required: true },
     area: {
       type: String,
-      enum: ['pinture', 'sculpture', 'arquitecture'],
+      enum: ['painting', 'sculpture', 'arquitecture'],
       required: true,
       trim: true
     },
