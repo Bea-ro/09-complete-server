@@ -18,7 +18,7 @@ const createArtwork = async (req, res, next) => {
       const imageBuffer = req.file.buffer.toString('base64');
       newArtwork.image = `data:${req.file.mimetype};base64,${imageBuffer}`;
     } else {
-      newArtwork.image = 'No image';
+      newArtwork.image = '';
     }
     const createdArtwork = await newArtwork.save();
     return res.status(201).json(createdArtwork);
