@@ -14,7 +14,7 @@ const { uploadImgCloudinary } = require('../../middlewares/uploadFile');
 
 router.get('/', getAllArtworks);
 router.get('/:id', getArtworkById);
-router.post('/', [isAuth], createArtwork);
+router.post('/', [isAuth], uploadImgCloudinary.single('image'), createArtwork);
 router.put('/:id', [isAuth], updateArtworkById);
 router.patch('/:id', [isAuth], uploadImgCloudinary.single('image'), uploadArtworkImg);
 router.delete('/:id', [isAuth], deleteArtwork);
