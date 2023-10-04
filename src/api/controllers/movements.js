@@ -5,7 +5,7 @@ const getAllMovements = async (req, res, next) => {
     const Movements = await Movement.find().populate('mainArtworks').populate('authors');
     return res.status(200).json(Movements);
   } catch (error) {
-    return res.status(400).json({ mensaje: 'Error getting movements', error: error });
+    return res.status(400).json({ message: 'Error getting movements', error: error });
   }
 };
 
@@ -15,7 +15,7 @@ const createMovement = async (req, res, next) => {
     const createdMovement = await newMovement.save();
     return res.status(201).json(createdMovement);
   } catch (error) {
-    return res.status(400).json({ mensaje: 'Error saving movement', error: error });
+    return res.status(400).json({ message: 'Error saving movement', error: error });
   }
 };
 
@@ -26,7 +26,7 @@ const getMovementById = async (req, res, next) => {
       .populate('authors');
     return res.status(200).json(movement);
   } catch (error) {
-    return res.status(400).json({ mensaje: 'Movement not found', error: error });
+    return res.status(400).json({ message: 'Movement not found', error: error });
   }
 };
 
@@ -38,7 +38,7 @@ const updateMovementById = async (req, res, next) => {
     });
     return res.status(200).json(updatedMovement);
   } catch (error) {
-    return res.status(400).json({ mensaje: 'Error updating movement', error: error });
+    return res.status(400).json({ message: 'Error updating movement', error: error });
   }
 };
 
@@ -48,7 +48,7 @@ const deleteMovement = async (req, res, next) => {
     await Movement.findByIdAndDelete(id);
     return res.status(200).json('Movement deleted');
   } catch (error) {
-    return res.status(400).json({ mensaje: 'Error deleting movement', error: error });
+    return res.status(400).json({ message: 'Error deleting movement', error: error });
   }
 };
 

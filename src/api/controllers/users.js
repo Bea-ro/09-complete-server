@@ -16,7 +16,7 @@ const registerUser = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
-      return res.status(400).json({ message: 'User already exists.' });
+      return res.status(400).json({ message: 'User already exists.', error: error });
     }
     const newUser = new User(req.body);
     const createdUser = await newUser.save();
@@ -30,16 +30,16 @@ const loginUser = async (req, res, next) => {
   try {
     const userDB = await User.findOne({ email: req.body.email });
     if (!userDB) {
-      return res.status(400).json({ message: 'User does not exists.' });
+      return res.status(400).json({ message: 'User does not exists.', error: error });
     }
 
     if (bcrypt.compareSync(req.body.password, userDB.password)) {
       const token = signToken(userDB._id);
       return res.status(200).json({ token, userDB });
     }
-    return res.status(400).json({ message: 'Incorrect password.' });
+    return res.status(400).json({ message: 'Incorrect password.', error: error });
   } catch (error) {
-    return res.status(400).json({ message: 'Login failed.' });
+    return res.status(400).json({ message: 'Login failed.', error: error });
   }
 };
 
@@ -49,7 +49,7 @@ const deregisterUser = async (req, res, next) => {
     await User.findByIdAndDelete(id);
     return res.status(200).json('User deregistered.');
   } catch (error) {
-    return res.status(400).json({ message: 'Error deregistering user.' });
+    return res.status(400).json({ message: 'Error deregistering user.', error: error });
   }
 };
 

@@ -5,7 +5,7 @@ const getAllAuthors = async (req, res, next) => {
     const authors = await Author.find().populate('mainArtworks');
     return res.status(200).json(authors);
   } catch (error) {
-    return res.status(400).json({ data: 'Error getting authors', error: error });
+    return res.status(400).json({ message: 'Error getting authors', error: error });
   }
 };
 
@@ -15,7 +15,7 @@ const createAuthor = async (req, res, next) => {
     const createdAuthor = await newAuthor.save();
     return res.status(201).json(createdAuthor);
   } catch (error) {
-    return res.status(400).json({ data: 'Error saving author', error: error });
+    return res.status(400).json({ message: 'Error saving author', error: error });
   }
 };
 
@@ -24,7 +24,7 @@ const getAuthorById = async (req, res, next) => {
     const author = await Author.findById(req.params.id).populate('mainArtworks');
     res.status(200).json(author);
   } catch (error) {
-    return res.status(400).json({ data: 'Author not found', error: error });
+    return res.status(400).json({ message: 'Author not found', error: error });
   }
 };
 
@@ -36,7 +36,7 @@ const updateAuthorById = async (req, res, next) => {
     }).populate('mainArtworks');
     return res.status(200).json(updatedAuthor);
   } catch (error) {
-    return res.status(400).json({ data: 'Error updating author', error: error });
+    return res.status(400).json({ message: 'Error updating author', error: error });
   }
 };
 
@@ -46,7 +46,7 @@ const deleteAuthor = async (req, res, next) => {
     await Author.findByIdAndDelete(id);
     return res.status(200).json('Author deleted in DB');
   } catch (error) {
-    return res.status(400).json({ data: 'Error deleting author in DB', error: error });
+    return res.status(400).json({ message: 'Error deleting author in DB', error: error });
   }
 };
 
@@ -54,6 +54,8 @@ const addOrRemoveArtwork = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { mainArtwork } = req.body;
+    console.log(id)
+    console.log(mainArtwork)
     const selectedAuthor = await Author.findById(id);
 
     if (selectedAuthor.mainArtworks.includes(mainArtwork)) {
@@ -75,7 +77,7 @@ const addOrRemoveArtwork = async (req, res, next) => {
     );
     return res.status(200).json(updatedAuthor);
   } catch (error) {
-    return res.status(400).json({ mensaje: 'Error añadiendo obra al autor', error: error });
+    return res.status(400).json({ message: 'Error adding artwork to artist', error: error });
   }
 };
 
