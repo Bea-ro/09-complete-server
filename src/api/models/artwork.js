@@ -12,7 +12,7 @@ const ArtworkSchema = new mongoose.Schema(
       trim: true
     },
     movement: { type: String, required: true, trim: true },
-    image: { type: String, required: false, trim: true }
+    image: { type: mongoose.Schema.Types.Mixed, required: false }
   },
   {
     timestamps: true,
