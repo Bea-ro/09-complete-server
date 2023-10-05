@@ -17,7 +17,7 @@ const isAuth = async (req, res, next) => {
     req.user = userLogued;
     next();
   } catch (error) {
-    return res.status(401).json('Authentication failed');
+    return res.status(401).json('Authentication failed. Please, login again.');
   }
 };
 

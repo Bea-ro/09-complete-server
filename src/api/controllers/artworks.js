@@ -13,13 +13,7 @@ const getAllArtworks = async (req, res, next) => {
 const createArtwork = async (req, res, next) => {
   try {
     const newArtwork = new Artwork(req.body);
-    if (req.file) {
-      console.log(req.file)
-      const imageBuffer = req.file.buffer.toString('base64');
-      newArtwork.image = `data:${req.file.mimetype};base64,${imageBuffer}`;
-    } else {
-      newArtwork.image = '';
-    }
+    newArtwork.image = req.file.path;
     const createdArtwork = await newArtwork.save();
     return res.status(201).json(createdArtwork);
   } catch (error) {
