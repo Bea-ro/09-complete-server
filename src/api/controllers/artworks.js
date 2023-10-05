@@ -12,14 +12,10 @@ const getAllArtworks = async (req, res, next) => {
 
 const createArtwork = async (req, res, next) => {
   try {
-    const newArtwork = new Artwork({
-      title: req.body.title,
-      author: req.body.author,
-      year: req.body.year,
-      area: req.body.area,
-      movement: req.body.movement,
-      image: req.file.path
-    });
+    const newArtwork = new Artwork(req.body);
+    if (req.file) {
+      newArtwork.image = req.file.path;
+    }
     const createdArtwork = await newArtwork.save();
     return res.status(201).json(createdArtwork);
   } catch (error) {
