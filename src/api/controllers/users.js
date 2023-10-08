@@ -37,9 +37,9 @@ const loginUser = async (req, res, next) => {
       const token = signToken(userDB._id);
       return res.status(200).json({ token, userDB });
     }
-    return res.status(400).json({ message: 'Incorrect password.', error: error });
+    return res.status(400).json({ message: 'Please, check your email and password and try again.', error: error });
   } catch (error) {
-    return res.status(400).json({ message: 'Login failed.', error: error });
+    return res.status(400).json({ message: 'Please, check your email and password and try again.', error: error });
   }
 };
 
