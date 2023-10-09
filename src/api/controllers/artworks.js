@@ -48,7 +48,7 @@ const deleteArtwork = async (req, res, next) => {
   try {
     const { id } = req.params;
     await Artwork.findByIdAndDelete(id);
-    return res.status(200).json('Artwork deleted.');
+    return res.status(200).json('Artwork succesfuly removed.');
   } catch (error) {
     return res.status(400).json({ message: 'Error deleting artwork', error: error });
   }
