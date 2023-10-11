@@ -65,8 +65,10 @@ const deleteArtworkFieldById = async (req, res, next) => {
 };
 
 const uploadArtworkImg = async (req, res, next) => {
+  console.log('req.file', req.file);
   try {
     const { id } = req.params;
+    console.log('id', id)
     if (req.file) {
       const originalArtwork = await Artwork.findById(id);
       console.log('originalArtwork', originalArtwork);
