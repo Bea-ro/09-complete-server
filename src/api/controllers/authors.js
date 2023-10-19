@@ -54,8 +54,6 @@ const addOrRemoveArtwork = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { mainArtwork } = req.body;
-    console.log(id)
-    console.log(mainArtwork)
     const selectedAuthor = await Author.findById(id);
 
     if (selectedAuthor.mainArtworks.includes(mainArtwork)) {

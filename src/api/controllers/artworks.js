@@ -1,5 +1,6 @@
 const Artwork = require('../models/artwork');
 const { deleteImgCloudinary } = require('../../middlewares/uploadFile');
+const Author = require('../models/author');
 
 const getAllArtworks = async (req, res, next) => {
   try {
@@ -40,7 +41,9 @@ const updateArtworkById = async (req, res, next) => {
     });
     return res.status(200).json(newArtwork);
   } catch (error) {
-    return res.status(400).json({ message: 'Error updating artwork. Check your data and try again.', error: error });
+    return res
+      .status(400)
+      .json({ message: 'Error updating artwork. Check your data and try again.', error: error });
   }
 };
 
@@ -65,10 +68,8 @@ const deleteArtworkFieldById = async (req, res, next) => {
 };
 
 const uploadArtworkImg = async (req, res, next) => {
-  console.log('req.file', req.file);
   try {
     const { id } = req.params;
-    console.log('id', id)
     if (req.file) {
       const originalArtwork = await Artwork.findById(id);
       console.log('originalArtwork', originalArtwork);
