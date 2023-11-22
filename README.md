@@ -7,6 +7,7 @@
 - **Rate limit** at 50 requests / 3 minutes.
 - Protected routes by **JWT** (1 hour expiration).
 - Images upload and storage in **Clodinary**.
+- **Eslint** and **Prettier** configuration and use.
 - Deployment with **Render**.
 
 
