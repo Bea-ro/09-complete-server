@@ -1,4 +1,4 @@
-> Deployed API 👉 https://complete-server-rtc.onrender.com/api
+> Deployed API 👉 https://09-complete-server-production.up.railway.app/api
 
 ## Skills
 
@@ -8,13 +8,13 @@
 - **Rate limit** at 50 requests / 3 minutes.
 - Protected routes by **JWT** (1 hour expiration).
 - Images upload and storage in **Clodinary**.
-- Deployed on **Render**.
+- Deployed on **Railway**.
 
 ## Endpoints realted to https://complete-server-rtc.onrender.com/api
 
 Authentication is required for the requests whose description cointains (auth).
 
-Page not found example: https://complete-server-rtc.onrender.com/ap
+Page not found example: https://09-complete-server-production.up.railway.app/abc
 
 ### AUTHORS MODEL:
 
