@@ -4,7 +4,8 @@
 app = '09-complete-server'
 primary_region = 'cdg'
 
-[build]
+[build.args]
+NODE_VERSION = "20"
 
 [http_service]
   internal_port = 8080
