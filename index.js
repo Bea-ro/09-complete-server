@@ -40,9 +40,10 @@ app.use((error, req, res, next) => {
 });
 
 const PORT = Number(process.env.PORT) || 8080;
+const HOST = '0.0.0.0';
 
 connect();
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Server running on http://${HOST}:${PORT}`);
 });
