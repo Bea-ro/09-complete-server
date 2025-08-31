@@ -39,10 +39,10 @@ app.use((error, req, res, next) => {
   res.status(500).json({ message: 'Internal server error', error });
 });
 
-const PORT = Number(process.env.PORT);
+const PORT = Number(process.env.PORT) || 8080;
 
 connect();
 
-app.listen(PORT || 3000, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
