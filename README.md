@@ -1,4 +1,4 @@
-> Deployed API 👉 https://09-complete-server-production.up.railway.app/api
+> Deployed API 👉 https://09-complete-server.fly.dev/
 
 ## Skills
 
